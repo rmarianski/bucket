@@ -12,6 +12,7 @@ requires = [
     'repoze.tm',
     'ZODB3',
     'WebError',
+    'deform',
     ]
 
 setup(name='bucket',
