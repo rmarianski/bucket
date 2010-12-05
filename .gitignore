@@ -1,0 +1,4 @@
+Data.fs*
+bucket.egg-info
+.coverage
+*.pt.py

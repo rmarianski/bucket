@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<body>
+  <div metal:use-macro="main.macros['main']">
+    <metal:body fill-slot="body">
+      <h1>Results</h1>
+      <ul>
+        <li tal:repeat="result results">
+          <a href="${result['url']}">${result['item'].label}</a>
+        </li>
+      </ul>
+    </metal:body>
+  </div>
+</body>
+</html>

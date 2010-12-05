@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<body>
+  <div metal:use-macro="main.macros['main']">
+    <metal:body fill-slot="body">
+      <h1>Bucket list</h1>
+      <p>This app is a container that can serve out different json results</p>
+      <ul>
+        <li><a href="${results_url}">all</a></li>
+        <li><a href="${all_json_url}">all json</a></li>
+        <li><a href="${people_json_url}">just people json</a></li>
+      </ul>
+    </metal:body>
+  </div>
+</body>
+</html>

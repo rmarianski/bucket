@@ -1,0 +1,78 @@
+<configure xmlns="http://pylonshq.com/pyramid">
+
+  <include package="pyramid.includes" />
+
+  <view
+     context=".models.Root"
+     view=".views.home_view"
+     renderer="templates/home.pt"
+     />
+
+  <view
+     context=".models.ResultsContainer"
+     view=".views.results_view"
+     renderer="templates/results.pt"
+     />
+
+  <view
+     context=".models.Result"
+     view=".views.generic_result_view"
+     renderer="templates/result.pt"
+     />
+
+  <view
+     context=".models.Person"
+     view=".views.person_view"
+     renderer="templates/result.pt"
+     />
+
+  <view
+     context=".models.ResultsContainer"
+     name="all.json"
+     view=".views.all_results_json_view"
+     renderer="json"
+     />
+
+  <view
+     context=".models.ResultsContainer"
+     name="people.json"
+     view=".views.people_results_json_view"
+     renderer="json"
+     />
+
+  <adapter
+     for=".models.Person"
+     provides=".interfaces.IMakeJson"
+     factory=".json_adapters.PersonToJson"
+     />
+
+  <adapter
+     for=".models.Post"
+     provides=".interfaces.IMakeJson"
+     factory=".json_adapters.BaseResultToJson"
+     />
+
+  <adapter
+     for=".models.Page"
+     provides=".interfaces.IMakeJson"
+     factory=".json_adapters.BaseResultToJson"
+     />
+
+  <adapter
+     for=".models.File"
+     provides=".interfaces.IMakeJson"
+     factory=".json_adapters.BaseResultToJson"
+     />
+
+  <adapter
+     for=".models.Other"
+     provides=".interfaces.IMakeJson"
+     factory=".json_adapters.BaseResultToJson"
+     />
+
+  <static
+     name="static"
+     path="static"
+     />
+
+</configure>

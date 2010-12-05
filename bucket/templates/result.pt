@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<body>
+  <div metal:use-macro="main.macros['main']">
+    <metal:body fill-slot="body">
+      <span tal:replace="structure form" />
+    </metal:body>
+  </div>
+</body>
+</html>
