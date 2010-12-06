@@ -77,6 +77,8 @@ def results_view(context, request):
         results.append(dict(url=url,
                             item=result,
                             ))
+    # sort results alphabetically for consistent ordering
+    results.sort(key=lambda x:getattr(x['item'], 'label', None))
     return {'main': main, 'results': results}
 
 def _make_json_results_view(predicate=None):
