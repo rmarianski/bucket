@@ -65,7 +65,7 @@ def setup_app():
         add_obj(results, slug, Person(
             label=name.decode(),
             department=u'Human Resources',
-            extension=u'7984',
+            extension=u'x7984',
             url=u'',
             ))
 
