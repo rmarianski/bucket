@@ -33,6 +33,13 @@
      renderer="json"
      />
 
+  <view
+     context=".models.Root"
+     name="livesearch"
+     view=".views.livesearch_view"
+     renderer="templates/livesearch.pt"
+     />
+
   <adapter
      for=".models.Person"
      provides=".interfaces.IMakeJson"
@@ -61,6 +68,11 @@
      for=".models.Other"
      provides=".interfaces.IMakeJson"
      factory=".json_adapters.BaseResultToJson"
+     />
+
+  <static
+     name="static"
+     path="static"
      />
 
   <static

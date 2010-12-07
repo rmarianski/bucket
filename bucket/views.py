@@ -20,8 +20,7 @@ def home_view(context, request):
     all_json_url = model_url(results, request, 'query.json')
     people_json_url = model_url(results, request, 'query.json',
                                 query=dict(category='People'))
-    bottlecap_url = model_url(context, request,
-                              'bottlecap', 'sl', 'livesearch', 'demo.html')
+    bottlecap_url = model_url(context, request, 'livesearch')
     return {'main': main,
             'results_url': results_url,
             'all_json_url': all_json_url,
@@ -101,3 +100,10 @@ def json_query_view(context, request):
         json_struct = json_adapter.to_json_struct()
         results.append(json_struct)
     return results
+
+def livesearch_view(request):
+    sl = "/bottlecap/sl"
+    main = get_renderer('templates/master.pt').implementation()
+    return {'main': main,
+            'sl': sl,
+            }

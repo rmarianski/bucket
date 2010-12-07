@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal">
+<metal:macro use-macro="main.macros['main']">
+<head metal:fill-slot="head">
+  <title>Bottlecap</title>
+  <script src="${sl}/jquery-1.4.4.min.js"></script>
+  <link href="${sl}/jquery-ui-1.9m3.custom.css" rel="stylesheet" />
+  <link href="${sl}/jquery.ui.selectmenu.css" rel="stylesheet" />
+  <link href="${sl}/livesearch/demo.css" rel="stylesheet" />
+
+  <script src="${sl}/jquery-ui-1.9m3.custom.min.js"></script>
+  <script src="${sl}/jquery.ajaxmanager-3.0.7.js"></script>
+  <script src="${sl}/livesearch/livesearch.js"></script>
+  <script src="/static/search.js"></script>
+
+</head>
+<body>
+  <metal:body fill-slot="body">
+  <div class="bc-header">
+
+    <div class="bc-header-toolbox">
+      <button class="ui-ls-menu">All Content</button><ul>
+        <li><a href="#">People</a></li>
+        <li><a href="#">Pages</a></li>
+        <li><a href="#">Posts</a></li>
+        <li><a href="#">Files</a></li>
+        <li><a href="#">Other</a></li>
+        <li><a href="#">All Content</a></li>
+      </ul><input class="ui-ls-autocomplete" /><button class="ui-ls-gobtn">Search</button>
+    </div>
+
+    <h1>Bottlecap</h1>
+
+  </div>
+
+  <div class="bc-content-frame">
+  </div>
+
+  </metal:body>
+</body>
+</metal:macro>
+</html>

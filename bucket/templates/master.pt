@@ -3,14 +3,14 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal">
 <metal:main define-macro="main">
-<head>
+<head metal:define-slot="head">
   <title>Bucket</title>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
   <meta name="keywords" content="python web application" />
   <meta name="description" content="pyramid web application" />
 </head>
 <body>
-    <h1 metal:define-slot="body">Bucket</h1>
+  <h1 metal:define-slot="body">Bucket</h1>
 </body>
 </metal:main>
 </html>
