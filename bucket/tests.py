@@ -24,9 +24,10 @@ class ViewTests(unittest.TestCase):
         context = self._make_root_with_results()
         info = home_view(context, request)
         self.assertEqual('http://example.com/results/', info['results_url'])
-        self.assertEqual('http://example.com/results/all.json',
+        self.assertEqual('http://example.com/results/query.json',
                          info['all_json_url'])
-        self.assertEqual('http://example.com/results/people.json',
+        self.assertEqual('http://example.com/results/query.json'
+                         '?category=People',
                          info['people_json_url'])
 
     def test_results_view(self):
@@ -168,17 +169,15 @@ class ResultsJsonTest(unittest.TestCase):
         return results
 
     def test_all_json(self):
-        from bucket.views import all_results_json_view
-        from bucket.models import Person
+        from bucket.views import json_query_view
         request = testing.DummyRequest()
         results = self._makeResults()
-        info = all_results_json_view(results, request)
+        info = json_query_view(results, request)
         self.assertEqual(2, len(info))
 
     def test_people_json(self):
-        from bucket.views import people_results_json_view
-        from bucket.models import Person
-        request = testing.DummyRequest()
+        from bucket.views import json_query_view
+        request = testing.DummyRequest(dict(category='People'))
         results = self._makeResults()
-        info = people_results_json_view(results, request)
+        info = json_query_view(results, request)
         self.assertEqual(1, len(info))

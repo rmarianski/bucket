@@ -18,3 +18,14 @@ def person_to_dict(person):
         department=person.department,
         extension=person.extension,
         )
+
+def result_contains(result, s):
+    """return true if the result contains s as a substring in any property"""
+    s = s.lower()
+    for prop in dir(result):
+        # skip private _ and nonstring properties
+        if ((not prop.startswith('_')) and
+            isinstance(getattr(result, prop), basestring) and
+            s in getattr(result, prop).lower()):
+                return True
+    return False

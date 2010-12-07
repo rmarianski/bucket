@@ -28,15 +28,8 @@
 
   <view
      context=".models.ResultsContainer"
-     name="all.json"
-     view=".views.all_results_json_view"
-     renderer="json"
-     />
-
-  <view
-     context=".models.ResultsContainer"
-     name="people.json"
-     view=".views.people_results_json_view"
+     name="query.json"
+     view=".views.json_query_view"
      renderer="json"
      />
 
@@ -71,8 +64,8 @@
      />
 
   <static
-     name="static"
-     path="static"
+     name="bottlecap"
+     path="../bottlecap"
      />
 
 </configure>

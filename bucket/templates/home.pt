@@ -6,6 +6,7 @@
     <metal:body fill-slot="body">
       <h1>Bucket list</h1>
       <p>This app is a container that can serve out different json results</p>
+      <p><a href="${bottlecap_url}">bottlecap</a></p>
       <ul>
         <li><a href="${results_url}">all</a></li>
         <li><a href="${all_json_url}">all json</a></li>

@@ -21,6 +21,7 @@ class Person(Result):
     icon = 'headshot.jpg'
     department = u''
     extension = u''
+    type = u'profile'
 
 class Page(Result):
     category = u'Pages'

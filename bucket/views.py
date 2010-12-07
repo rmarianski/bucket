@@ -11,17 +11,22 @@ from bucket.schema import BaseResultSchema
 from bucket.schema import PersonSchema
 from bucket.util import person_to_dict
 from bucket.util import result_to_dict
+from bucket.util import result_contains
 
 def home_view(context, request):
     main = get_renderer('templates/master.pt').implementation()
     results = context['results']
     results_url = model_url(results, request)
-    all_json_url = model_url(results, request, 'all.json')
-    people_json_url = model_url(results, request, 'people.json')
+    all_json_url = model_url(results, request, 'query.json')
+    people_json_url = model_url(results, request, 'query.json',
+                                query=dict(category='People'))
+    bottlecap_url = model_url(context, request,
+                              'bottlecap', 'sl', 'livesearch', 'demo.html')
     return {'main': main,
             'results_url': results_url,
             'all_json_url': all_json_url,
             'people_json_url': people_json_url,
+            'bottlecap_url': bottlecap_url,
             }
 
 def generic_result_view(context, request):
@@ -81,19 +86,18 @@ def results_view(context, request):
     results.sort(key=lambda x:getattr(x['item'], 'label', None))
     return {'main': main, 'results': results}
 
-def _make_json_results_view(predicate=None):
-    def json_view(context, request):
-        registry = request.registry
-        results = []
-        for result in filter(predicate, context.values()):
-            json_adapter = registry.getAdapter(result, IMakeJson)
-            json_struct = json_adapter.to_json_struct()
-            results.append(json_struct)
-        return results
-    return json_view
-
-def _only_people(obj):
-    return getattr(obj, 'category', '') == 'People'
-
-all_results_json_view = _make_json_results_view()
-people_results_json_view = _make_json_results_view(predicate=_only_people)
+def json_query_view(context, request):
+    category = request.GET.get('category', '')
+    query = request.GET.get('q', '')
+    registry = request.registry
+    results = []
+    for result in context.values():
+        if (category and category != 'all' and
+            getattr(result, 'category', '') != category):
+            continue
+        if query and not result_contains(result, query):
+            continue
+        json_adapter = registry.getAdapter(result, IMakeJson)
+        json_struct = json_adapter.to_json_struct()
+        results.append(json_struct)
+    return results
