@@ -1,0 +1,3 @@
+[submodule "bottlecap"]
+	path = bottlecap
+	url = git@github.com:rmarianski/bottlecap.git
