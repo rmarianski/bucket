@@ -141,7 +141,7 @@ class ResultsJsonTest(unittest.TestCase):
 
     def setUp(self):
         from bucket.interfaces import IMakeJson
-        from bucket.models import Person, Post
+        from bucket.models import Person, Post, File
         from bucket.json_adapters import PersonToJson, BaseResultToJson
         self.config = Configurator()
         self.config.begin()
@@ -149,23 +149,28 @@ class ResultsJsonTest(unittest.TestCase):
         self.config.registry.registerAdapter(BaseResultToJson,
                                              (Post,),
                                              IMakeJson)
+        self.config.registry.registerAdapter(BaseResultToJson,
+                                             (File,),
+                                             IMakeJson)
 
     def tearDown(self):
         self.config.end()
 
     def _makeResults(self):
-        from bucket.models import Person, Post
+        from bucket.models import Person, Post, File
         root = testing.DummyModel()
         results = testing.DummyModel(__name__='results',
                                      __parent__=root)
-        person = Person(label=u'foo')
-        person.__name__ = 'foo'
-        person.__parent__ = results
-        post = Post(label=u'quux')
-        post.__name__ = 'quux'
-        post.__parent__ = results
-        results['foo'] = person
-        results['quux'] = post
+        def add_obj_to_results(obj, name):
+            obj.__name__ = name
+            obj.__parent__ = results
+            results[name] = obj
+        add_obj_to_results(Person(label=u'foo'), 'foo')
+        add_obj_to_results(Post(label=u'quux'), 'quux')
+        add_obj_to_results(Post(label=u'baz'), 'baz')
+        add_obj_to_results(Person(label=u'bar'), 'bar')
+        add_obj_to_results(Post(label=u'fleem'), 'fleem')
+        add_obj_to_results(File(label=u'morx'), 'morx')
         return results
 
     def test_all_json(self):
@@ -173,11 +178,23 @@ class ResultsJsonTest(unittest.TestCase):
         request = testing.DummyRequest()
         results = self._makeResults()
         info = json_query_view(results, request)
-        self.assertEqual(2, len(info))
+        self.assertEqual(6, len(info))
 
     def test_people_json(self):
         from bucket.views import json_query_view
         request = testing.DummyRequest(dict(category='People'))
         results = self._makeResults()
         info = json_query_view(results, request)
-        self.assertEqual(1, len(info))
+        self.assertEqual(2, len(info))
+
+    def test_multiple_results_order_json(self):
+        from bucket.views import json_query_view
+        request = testing.DummyRequest(dict(category='all'))
+        results = self._makeResults()
+        info = json_query_view(results, request)
+        self.assertEqual(6, len(info))
+        # assert proper orderings of categories
+        people, posts, files = info[:2], info[2:5], info[5:]
+        self.failUnless(all([x['category'] == 'People' for x in people]))
+        self.failUnless(all([x['category'] == 'Posts' for x in posts]))
+        self.failUnless(all([x['category'] == 'Files' for x in files]))

@@ -89,6 +89,7 @@ def json_query_view(context, request):
     category = request.GET.get('category', '')
     query = request.GET.get('q', '')
     registry = request.registry
+    results_by_category = {}
     results = []
     for result in context.values():
         if (category and category != 'all' and
@@ -98,7 +99,13 @@ def json_query_view(context, request):
             continue
         json_adapter = registry.getAdapter(result, IMakeJson)
         json_struct = json_adapter.to_json_struct()
-        results.append(json_struct)
+        results_by_category.setdefault(result.category, []).append(json_struct)
+
+    #organize results by category
+    for category in (u'People', u'Pages', u'Posts', u'Files', u'Other'):
+        category_results = results_by_category.get(category, [])
+        category_results.sort(key=lambda x:getattr(x, 'label', None))
+        results.extend(category_results)
     return results
 
 def livesearch_view(request):
