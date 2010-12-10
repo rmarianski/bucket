@@ -17,8 +17,11 @@ $(function() {
         },
         menu: function(event, ui) {
             var text = ui.text;
-            var urlFn = createUrlFn(
-                text === 'People' ? 'People' : 'all');
+            var category = text;
+            if (category === 'All Content') {
+                category = 'all';
+            }
+            var urlFn = createUrlFn(category)
             $('.ui-ls-autocomplete').livesearch('option', 'urlfn', urlFn);
         },
         renderCompletions: renderCompletions

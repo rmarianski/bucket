@@ -11,6 +11,7 @@
 
   <script src="${sl}/jquery-ui-1.9m3.custom.min.js"></script>
   <script src="${sl}/jquery.ajaxmanager-3.0.7.js"></script>
+  <script src="${sl}/jquery.cookie.js"></script>
   <script src="${sl}/livesearch/livesearch.js"></script>
   <script src="/static/search.js"></script>
 
