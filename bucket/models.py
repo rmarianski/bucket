@@ -84,6 +84,8 @@ def setup_app():
     for name in ["Re: UCB Lecture Stats",
                  "Changes and improvements abroad",
                  "Re: Consortium planning and updates",
+                 "New communications standards",
+                 "Communications procedures",
                  ]:
         slug = text_to_slug(name)
         add_obj(results, slug, Post(
@@ -100,6 +102,9 @@ def setup_app():
                  "Brown-Bag Lunch: 'The Liberian Diaspora'",
                  "Consortium Activities",
                  "HR Initiatives",
+                 "File from rob",
+                 "chris uploaded this",
+                 "another chris file",
                  ]:
         slug = text_to_slug(name)
         add_obj(results, slug, File(
