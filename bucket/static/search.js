@@ -24,6 +24,8 @@ $(function() {
             var urlFn = createUrlFn(category)
             $('.ui-ls-autocomplete').livesearch('option', 'urlfn', urlFn);
         },
+        queryValidateFn: $.bottlecap.livesearch.prototype.numCharsValidate,
+        queryTransformFn: $.bottlecap.livesearch.prototype.globQueryTransform,
         renderCompletions: renderCompletions
     });
 

@@ -88,6 +88,8 @@ def results_view(context, request):
 def json_query_view(context, request):
     category = request.GET.get('category', '')
     query = request.GET.get('q', '')
+    # ignore * globbing in query
+    query = query.replace('*', '')
     registry = request.registry
     results_by_category = {}
     results = []
