@@ -10,7 +10,7 @@ function createUrlFn(category) {
 $(function() {
 
     $('.ui-ls-autocomplete').livesearch({
-        urlfn: createUrlFn('all'),
+        urlFn: createUrlFn('all'),
         search: function(event, ui) {
             $('<p>Search for ' + ui.query + '</p>')
                 .prependTo($('.bc-content-frame'));
@@ -22,10 +22,11 @@ $(function() {
                 category = 'all';
             }
             var urlFn = createUrlFn(category)
-            $('.ui-ls-autocomplete').livesearch('option', 'urlfn', urlFn);
+            $('.ui-ls-autocomplete').livesearch('option', 'urlFn', urlFn);
         },
-        queryValidateFn: $.bottlecap.livesearch.prototype.numCharsValidate,
+        validationFn: $.bottlecap.livesearch.prototype.numCharsValidate,
         queryTransformFn: $.bottlecap.livesearch.prototype.globQueryTransform,
+        errorFn: $.bottlecap.livesearch.prototype.displayError,
         renderCompletions: renderCompletions
     });
 
