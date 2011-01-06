@@ -17,7 +17,17 @@ class BaseResultToJson(object):
         return result
 
 class PersonToJson(BaseResultToJson):
-    implements(IMakeJson)
-
     properties = BaseResultToJson.properties + (
         ('icon', 'department', 'email', 'extension'))
+
+class PageToJson(BaseResultToJson):
+    properties = BaseResultToJson.properties + (
+        ('community', 'author', 'modified'))
+
+class PostToJson(BaseResultToJson):
+    properties = BaseResultToJson.properties + (
+        ('community', 'author', 'created'))
+
+class FileToJson(BaseResultToJson):
+    properties = BaseResultToJson.properties + (
+        ('icon', 'author', 'modified'))

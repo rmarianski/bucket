@@ -26,15 +26,24 @@ class Person(Result):
 
 class Page(Result):
     category = u'Pages'
+    community = u'Awesome Community'
+    modified = u'01/23/11 3pm'
+    author = u'Johnny'
     type = 'wikipage'
 
 class Post(Result):
     category = u'Posts'
+    created = u'12/31/10 4:30pm'
+    community = u'Fantastic Community Name'
+    author = u'Sammy'
     type = u'blogentry'
 
 class File(Result):
     category = u'Files'
     type = u'file'
+    author = u'Michelle'
+    icon = 'headshot.jpg'
+    modified = u'2/3/11 10:12am'
 
 class Other(Result):
     category = u'Other'

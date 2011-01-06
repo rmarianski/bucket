@@ -49,19 +49,19 @@
   <adapter
      for=".models.Post"
      provides=".interfaces.IMakeJson"
-     factory=".json_adapters.BaseResultToJson"
+     factory=".json_adapters.PostToJson"
      />
 
   <adapter
      for=".models.Page"
      provides=".interfaces.IMakeJson"
-     factory=".json_adapters.BaseResultToJson"
+     factory=".json_adapters.PageToJson"
      />
 
   <adapter
      for=".models.File"
      provides=".interfaces.IMakeJson"
-     factory=".json_adapters.BaseResultToJson"
+     factory=".json_adapters.FileToJson"
      />
 
   <adapter
