@@ -87,9 +87,9 @@ function renderCompletions(ul, items) {
 
 var renderDispatchTable = {
     "profile":   renderPersonEntry,
-    "wikipage":  renderGenericEntry,
-    "blogentry": renderGenericEntry,
-    "file":      renderGenericEntry
+    "wikipage":  renderPageEntry,
+    "blogentry": renderPostEntry,
+    "file":      renderFileEntry
 };
 
 function renderPersonEntry(item) {
@@ -116,6 +116,39 @@ function renderPersonEntry(item) {
 
 function renderGenericEntry(item) {
     return $("<a></a>").text(item.label);
+}
+
+function renderPageEntry(item) {
+    var entry = $('<a class="ui-ls-page">');
+    entry
+        .append($('<div>')
+                .append($('<span>').text(item.label))
+                .append($('<span class="discreet">').text(
+                    ' - by ' + item.author + ' on ' + item.modified)))
+        .append($('<div>').text(item.community));
+    return entry;
+}
+
+function renderPostEntry(item) {
+    var entry = $('<a class="ui-ls-post">');
+    entry
+        .append($('<div>')
+                .append($('<span>').text(item.label))
+                .append($('<span class="discreet">').text(
+                    ' - by ' + item.author + ' on ' + item.created)))
+        .append($('<div>').text(item.community));
+    return entry;
+}
+
+function renderFileEntry(item) {
+    var entry = $('<a class="ui-ls-file">');
+    entry
+        .append($('<img>')
+                .attr('src', '/bottlecap/sl/livesearch/' + item.icon))
+        .append($('<div>').text(item.label))
+        .append($('<div class="discreet">').text(
+            'by ' + item.author + ' on ' + item.modified));
+    return entry;
 }
 
 function renderItem(ul, item) {
