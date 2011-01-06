@@ -85,32 +85,50 @@ function renderCompletions(ul, items) {
     ul.find('li:first').addClass('ui-ls-autocomplete-first');
 }
 
+var renderDispatchTable = {
+    "profile":   renderPersonEntry,
+    "wikipage":  renderGenericEntry,
+    "blogentry": renderGenericEntry,
+    "file":      renderGenericEntry
+};
+
+function renderPersonEntry(item) {
+    var entry = $('<a class="ui-ls-profile"></a>');
+    entry.append($('<img>')
+                 .attr('src', '/bottlecap/sl/livesearch/' + item.icon));
+    var userInfoDiv = $('<div class="user">')
+        .append($('<div>').text(item.label))
+        .append($('<div>').text(item.department));
+    var contactDiv = $('<div class="contact">')
+        .append($('<div>')                 //.text(item.email))
+                .append($('<a>')
+                        .attr('href', 'mailto:' + item.email)
+                        .text(item.email)
+                        .click(function() {
+                            window.location = 'mailto:' + item.email;
+                            return false;
+                        })))
+        .append($('<div>').text(item.extension));
+    entry.append(userInfoDiv).append(contactDiv)
+        .append($('<div style="clear: both">'));
+    return entry;
+}
+
+function renderGenericEntry(item) {
+    return $("<a></a>").text(item.label);
+}
+
 function renderItem(ul, item) {
     var li = $('<li>');
-    var entry, div;
-     // Render different items in different ways
-    switch (item.type) {
-        case 'profile': {
-            entry = $('<a class="ui-ls-profile"></a>');
-            entry.append($('<img>').attr('src', '/bottlecap/sl/livesearch/' + item.icon));
-            div = entry.append($('<div>'));
-            div.append(
-                $('<span class="ui-ls-profilelabel"></span>')
-                    .text(item.label)
-            );
-            div.append($('<span>')
-                       .text(item.extension));
-            entry.append($('<div>').text(item.department));
-            break;
-        };
-         default: {
-            entry = $( "<a></a>" ).text( item.label );
-        };
-    };
-    return $( "<li></li>" )
-        .data( "item.autocomplete", item )
-        .append( entry )
-        .appendTo( ul );
+    // Render different items in different ways
+    // dispatch based on the type of the item
+    var type     = item.type,
+        renderFn = renderDispatchTable[type] || renderGenericEntry,
+        entry    = renderFn(item);
+    return $("<li></li>")
+        .data("item.autocomplete", item)
+        .append(entry)
+        .appendTo(ul);
 }
 
 
