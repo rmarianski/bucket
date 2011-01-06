@@ -21,6 +21,7 @@ class Person(Result):
     icon = 'headshot.jpg'
     department = u''
     extension = u''
+    email = u''
     type = u'profile'
 
 class Page(Result):
@@ -59,13 +60,17 @@ def setup_app():
         container[slug] = obj
 
     # add some people
-    for name in ["Paul Everitt", "Robert Marianski", "Chris Rossi",
-                 "Chris McDonough"]:
+    for name, email in [("Paul Everitt", "paul@example.com"),
+                        ("Robert Marianski", "rob@example.com"),
+                        ("Chris Rossi", "chris@example.com"),
+                        ("Chris McDonough", "mcdonc@example.com"),
+                        ]:
         slug = text_to_slug(name)
         add_obj(results, slug, Person(
             label=name.decode(),
             department=u'Human Resources',
             extension=u'x7984',
+            email=email,
             url=u'',
             ))
 

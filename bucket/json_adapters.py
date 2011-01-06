@@ -20,4 +20,4 @@ class PersonToJson(BaseResultToJson):
     implements(IMakeJson)
 
     properties = BaseResultToJson.properties + (
-        ('icon', 'department', 'extension'))
+        ('icon', 'department', 'email', 'extension'))
