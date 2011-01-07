@@ -96,6 +96,7 @@ function renderPersonEntry(item) {
     var entry = $('<a class="ui-ls-profile"></a>');
     entry.append($('<img>')
                  .attr('src', '/bottlecap/sl/livesearch/' + item.icon));
+    var wrapDiv = $('<div>');
     var userInfoDiv = $('<div class="user">')
         .append($('<div>').text(item.label))
         .append($('<div>').text(item.department));
@@ -109,8 +110,8 @@ function renderPersonEntry(item) {
                             return false;
                         })))
         .append($('<div>').text(item.extension));
-    entry.append(userInfoDiv).append(contactDiv)
-        .append($('<div style="clear: both">'));
+    wrapDiv.append(userInfoDiv).append(contactDiv);
+    entry.append(wrapDiv).append($('<div style="clear: both">'));
     return entry;
 }
 
