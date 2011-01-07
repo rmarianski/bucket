@@ -111,8 +111,8 @@ def json_query_view(context, request):
     return results
 
 def livesearch_view(request):
-    sl = "/bottlecap/sl"
+    bc = "/bottlecap"
     main = get_renderer('templates/master.pt').implementation()
     return {'main': main,
-            'sl': sl,
+            'bc': bc,
             }

@@ -95,7 +95,7 @@ var renderDispatchTable = {
 function renderPersonEntry(item) {
     var entry = $('<a class="ui-ls-profile"></a>');
     entry.append($('<img>')
-                 .attr('src', '/bottlecap/sl/livesearch/' + item.icon));
+                 .attr('src', '/bottlecap/bc.livesearch/' + item.icon));
     var wrapDiv = $('<div>');
     var userInfoDiv = $('<div class="user">')
         .append($('<div>').text(item.label))
@@ -144,8 +144,6 @@ function renderPostEntry(item) {
 function renderFileEntry(item) {
     var entry = $('<a class="ui-ls-file">');
     entry
-        .append($('<img>')
-                .attr('src', '/bottlecap/sl/livesearch/' + item.icon))
         .append($('<div>').text(item.label))
         .append($('<div class="discreet">').text(
             'by ' + item.author + ' on ' + item.modified));
