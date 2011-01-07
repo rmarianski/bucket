@@ -47,6 +47,26 @@ class File(Result):
 
 class Other(Result):
     category = u'Other'
+    community = u'Other Community'
+
+class Event(Other):
+    start = u'1/2/11 1:00pm'
+    end = u'1/2/11 2:00pm'
+    location = u'4E'
+
+class Community(Other):
+    latest_activity = '1/3/11 11:14am'
+    num_members = 12
+    summary = u'A nice summary of what the community is about'
+
+class News(Other):
+    author = u'Jimmy'
+    created = '10/23/10 9:35am'
+
+class Forum(Other):
+    author = u'Susan'
+    created = '12/11/10 3:48pm'
+    num_comments = 4
 
 def text_to_slug(text):
     slug = text
